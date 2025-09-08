@@ -10,7 +10,7 @@ function VerifyEmail() {
   useEffect(() => {
     const verify = async () => {
       try {
-        await axios.get(`http://localhost:4000/api/auth/verify-email/${token}`);
+        await axios.get(`https://spothub.onrender.com/api/auth/verify-email/${token}`);
         setStatus('Email verified! Redirecting to login...');
         setTimeout(() => navigate('/login'), 2000);
       } catch (err) {

@@ -44,7 +44,7 @@ function ForgotPassword() {
 
     try {
       setLoading(true);
-      const response = await axios.post('http://localhost:5000/api/auth/reset-password', {
+      const response = await axios.post('https://spothub.onrender.com/api/auth/reset-password', {
         email: formData.email,
         newPassword: formData.newPassword,
       });

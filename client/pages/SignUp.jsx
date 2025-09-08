@@ -152,7 +152,7 @@ function SignUp() {
 
         <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
           <a
-            href={formData.role === 'admin' ? '#' : 'http://localhost:4000/api/auth/google'}
+            href={formData.role === 'admin' ? '#' : 'https://spothub.onrender.com/api/auth/google'}
             onClick={handleSocialLoginClick}
             className="flex items-center gap-2 px-4 py-2 border rounded-md hover:bg-gray-100 transition"
           >

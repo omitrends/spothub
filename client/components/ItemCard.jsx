@@ -25,7 +25,7 @@ function ItemCard({ item, type = 'found' }) {
 
     try {
       await axios.post(
-        'http://localhost:4000/api/items/notify-owner',
+        'https://spothub.onrender.com/api/items/notify-owner',
         {
           itemId,
           message: `Hi! I may have information about your item titled "${title}".`,

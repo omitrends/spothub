@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const API = axios.create({
-  baseURL: 'http://localhost:4000/api', // Proxy will forward to http://localhost:5000
+  baseURL: 'https://spothub.onrender.com/api', // Proxy will forward to http://localhost:5000
   withCredentials: false,
 });
 
