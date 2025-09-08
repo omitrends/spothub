@@ -18,7 +18,7 @@ connectCloudinary();
 
 // Middleware
 app.use(cors({
-  origin: 'http://localhost:5173', // frontend URL
+  origin: 'https://spothub-rouge.vercel.app', // frontend URL
   credentials: true,
 }));
 app.use(express.json());
