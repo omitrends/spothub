@@ -1,6 +1,6 @@
-# ClaimDesk 🧾 - Lost & Found Web App
+# Spothub 🧾 - Lost & Found Web App
 
-ClaimDesk is a MERN stack web application designed to streamline the process of reporting and claiming lost or found items. Whether you're a student, employee, or visitor, ClaimDesk helps you quickly report an item or find what's missing.
+Spothub is a MERN stack web application designed to streamline the process of reporting and claiming lost or found items. Whether you're a student, employee, or visitor, ClaimDesk helps you quickly report an item or find what's missing.
 
 ## 🛠️ Tech Stack
 
@@ -13,7 +13,7 @@ ClaimDesk is a MERN stack web application designed to streamline the process of 
 ## 📦 Features
 
 ### 👤 User Features
-- Register and login (email/password or via Google/Facebook/Apple)
+- Register and login (email/password or via Google)
 - Report lost or found items with image, location, and description
 - View and manage items you reported
 - Browse all lost/found items by others
