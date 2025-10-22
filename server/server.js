@@ -17,10 +17,26 @@ connectDB();
 connectCloudinary();
 
 // Middleware
-app.use(cors({
-  origin: 'https://spothub-rouge.vercel.app', // frontend URL
-  credentials: true,
-}));
+
+const allowedOrigins = [
+  'https://spothub-rouge.vercel.app',
+  'http://localhost:3000',
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow requests with no origin (like mobile apps or curl)
+      if (!origin) return callback(null, true);
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error('Not allowed by CORS'));
+      }
+    },
+    credentials: true,
+  })
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
