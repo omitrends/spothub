@@ -5,8 +5,7 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const { signup, login, resetPassword } = require('../controllers/authController');
 const verifyEmail = require('../controllers/verifyEmail');
-
-const CLIENT_URL = 'http://localhost:5173';
+const CLIENT_URL = process.env.CLIENT_URL;
 
 router.post('/signup', signup);
 router.post('/login', login);
