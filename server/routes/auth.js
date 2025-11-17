@@ -5,7 +5,8 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const { signup, login, resetPassword } = require('../controllers/authController');
 const verifyEmail = require('../controllers/verifyEmail');
-const CLIENT_URL = process.env.CLIENT_URL;
+// const CLIENT_URL = process.env.CLIENT_URL;
+const CLIENT_URL = 'https://spothub-rouge.vercel.app/';
 
 router.post('/signup', signup);
 router.post('/login', login);
