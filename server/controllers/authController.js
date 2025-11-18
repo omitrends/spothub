@@ -11,12 +11,16 @@ exports.signup = async (req, res) => {
   try {
     const { name, email, password, role, inviteCode } = req.body;
 
-    const existingUser = await User.findOne({ email }); 
-    if (existingUser) return res.status(400).json({ message: 'Email already in use' });
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return res.status(400).json({ message: "Email already in use" });
+    }
 
-    const isAdmin = role === 'admin' && inviteCode === ADMIN_INVITE_CODE;
-    if (role === 'admin' && !isAdmin) {
-      return res.status(403).json({ message: 'Invalid or missing invite code for admin registration' });
+    const isAdmin = role === "admin" && inviteCode === ADMIN_INVITE_CODE;
+    if (role === "admin" && !isAdmin) {
+      return res.status(403).json({
+        message: "Invalid or missing invite code for admin registration",
+      });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -25,44 +29,36 @@ exports.signup = async (req, res) => {
       name,
       email,
       password: hashedPassword,
-      role: role || 'user',
+      role: role || "user",
       isVerified: isAdmin ? true : false,
     });
+
     await user.save();
 
-    // Send email verification link only for non-admin users
+    // Send email if not admin
     if (!isAdmin) {
       const emailToken = generateEmailToken(user._id);
       const verifyLink = `${process.env.CLIENT_URL}/verify-email/${emailToken}`;
 
+      console.log("Verify Link:", verifyLink);
+
       await transporter.sendMail({
         from: process.env.EMAIL_USER,
         to: user.email,
-        subject: 'Verify your email - spothub',
-        html: `<p>Hi ${user.name},</p><p>Click <a href="${verifyLink}">here</a> to verify your email.</p>`
+        subject: "Verify your email - spothub",
+        html: `<p>Hi ${user.name},</p><p>Click <a href="${verifyLink}">here</a> to verify your email.</p>`,
       });
+
+      console.log("Email sent!");
     }
 
-    const token = jwt.sign(
-      { id: user._id, email: user.email, role: user.role },
-      process.env.JWT_SECRET,
-      { expiresIn: '1h' }
-    );
-
-    res.status(201).json({
-      message: isAdmin ? 'Admin created successfully' : 'User created. Please verify your email.',
-      token,
-      user: {
-        id: user._id,
-        name: user.name,
-        email: user.email,
-        role: user.role,
-      },
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (error) {
+    console.error("Signup error:", error);
+    res.status(500).json({ message: "Server error" });
   }
 };
+
 
 exports.login = async (req, res) => {
   try {
